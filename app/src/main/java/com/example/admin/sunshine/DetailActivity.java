@@ -12,7 +12,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 public class DetailActivity extends ActionBarActivity {
-
+    private String detailedForecast = "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,6 +43,11 @@ public class DetailActivity extends ActionBarActivity {
             startActivity(intent);
             return true;
         }
+        if(id == R.id.action_share) {
+            Intent intent = new Intent (Intent.ACTION_SEND);
+
+            return true;
+        }
         return super.onOptionsItemSelected(item);
     }
 
@@ -62,7 +67,8 @@ public class DetailActivity extends ActionBarActivity {
             TextView tv = (TextView)rootView.findViewById(R.id.detail_textview);
 
             if(intent != null && intent.hasExtra(Intent.EXTRA_TEXT))
-                tv.setText(intent.getStringExtra(Intent.EXTRA_TEXT));
+                detailedForecast = intent.getStringExtra(Intent.EXTRA_TEXT);
+                tv.setText(detailedForecast);
 
             return rootView;
         }
